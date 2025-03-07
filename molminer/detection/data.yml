@@ -1,0 +1,8 @@
+train: ./data/yolo_clef_data/clef_train.txt
+val: ./data/yolo_clef_data/clef_test.txt
+test: ./data/yolo_clef_data/clef_test.txt
+
+# Number of classes
+nc: 1
+
+names: ['diagram']

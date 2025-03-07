@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}MoleculeMiner{% endblock %}</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.1.81/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.3.1/papaparse.min.js"></script>
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/styles.css') }}">
+    {% block extra_head %}{% endblock %}
+</head>
+<body>
+    <header class="top-bar">
+        <div class="container">
+            <h1>MoleculeMiner: Extraction of Drawn Molecules and Demonstrated Properties</h1>
+        </div>
+    </header>
+    <div class="layout-container">
+        <nav class="sidebar">
+            <ul class="nav-links">
+                <li><a href="{{ url_for('upload_page') }}" {% if active_page == 'upload' %}class="active"{% endif %}>Upload New File</a></li>
+                <li><a href="{{ url_for('list_files') }}" {% if active_page == 'viewer' %}class="active"{% endif %}>View Existing Files</a></li>
+            </ul>
+        </nav>
+        <main class="main-content">
+            {% block content %}{% endblock %}
+        </main>
+    </div>
+    {% block scripts %}{% endblock %}
+</body>
+</html>

@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+
+{% block title %}MoleculeMiner - PDF Viewer{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <div id="main-text">
+        <h2>Upload PDF File</h2>
+        <form id="upload-form">
+            <input type="file" id="pdf-file" accept=".pdf" required>
+            <h2>Supply an OpenAI API Key (optional)</h2>
+            <input type="text" id="api-key" placeholder="API Key (optional)">
+            <br>
+            <h3>Would you also like table extraction performed?</h3>
+            <input type="checkbox" id="table_extraction" name="table_extraction">
+            <label for="table_extraction">Check for table extraction</label>
+            <br>
+            <br>
+            <button type="submit">Process PDF</button>
+        </form>
+    </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    document.getElementById('upload-form').addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        const formData = new FormData();
+        const pdfFile = document.getElementById('pdf-file').files[0];
+        const apiKey = document.getElementById('api-key').value;
+        const tableExtractionCheckbox = document.getElementById('table_extraction');
+        const extract = tableExtractionCheckbox.checked;
+
+
+        formData.append('pdf_file', pdfFile);
+        if (apiKey) {
+            formData.append('api_key', apiKey);
+        }
+        formData.append('table_extraction', extract.toString());
+
+        try {
+            const response = await fetch('/process', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+
+            alert('File uploaded successfully. You can view the results (once they finish) on the viewer page.');
+
+        } catch (error) {
+            console.error('Error:', error);
+        }
+    });
+</script>
+{% endblock %}

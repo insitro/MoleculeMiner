@@ -1,0 +1,27 @@
+[tool.ruff]
+line-length = 99
+
+[tool.ruff.lint]
+ignore = [
+  "E203", 
+  "E701",
+  "E731", 
+]
+select = [
+  # "B", # bugbear
+  # "C", # pylint
+  "C90", # mccabe
+  "E", # pycodestyle
+  "F", # pyflakes
+  "I", # isort
+  "W", # pycodestyle
+  "RUF100", # unnecessary noqa
+  "TID251", # banned imports 
+  "TID252", # no relative imports
+]
+
+[tool.ruff.lint.mccabe]
+max-complexity = 18
+
+[tool.ruff.lint.flake8-tidy-imports]
+ban-relative-imports = "all"

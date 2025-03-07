@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}MoleculeMiner - Available Files{% endblock %}
+
+{% block content %}
+<div class="content-container">
+    <div id="main-text">
+        <h2>Available Files</h2>
+        <div class="file-selector">
+            <select id="file-select" size="5">
+                <option value="">Select a file to view</option>
+                {% for file in files %}
+                    <option value="{{ file }}">{{ file }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+    <div class="download-button">
+        <a href="#" id="download-button" style="display: none;">Download Results File</a>
+    </div>
+    <div id="pdf-container">
+        <div id="pdf-page"></div>
+    </div>
+    <div id="info-modal" class="modal"></div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script src="{{ url_for('static', path='/js/script.js') }}"></script>
+{% endblock %}
